@@ -1,0 +1,206 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#5D6D7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="900" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="800" y="46" text-anchor="middle" font-size="27" font-weight="700" fill="#1B2631">Intelligent Road Pothole Detection and Severity Assessment using YOLOv8</text>
+  <text x="800" y="75" text-anchor="middle" font-size="15" fill="#5D6D7E">End-to-end computer vision pipeline architecture</text>
+
+  <!-- ===================== ROW 1 ===================== -->
+
+  <!-- Box 1: Input -->
+  <g>
+    <rect x="60" y="110" width="453" height="170" rx="14" fill="#F4F6F7" stroke="#7F8C8D" stroke-width="1.4"/>
+    <g transform="translate(80,128)" stroke="#5D6D7E" stroke-width="1.6" fill="none">
+      <rect x="0" y="4" width="26" height="18" rx="3"/>
+      <path d="M26 9L36 4V26L26 21Z"/>
+    </g>
+    <text x="126" y="146" font-size="17" font-weight="700" fill="#2C3E50">Input road video</text>
+    <text x="80" y="175" font-size="13" fill="#5D6D7E">
+      <tspan x="80" dy="0">Raw video stream from a</tspan>
+      <tspan x="80" dy="18">vehicle-mounted or roadside camera</tspan>
+    </text>
+  </g>
+
+  <!-- Box 2: Frame acquisition -->
+  <g>
+    <rect x="573" y="110" width="453" height="170" rx="14" fill="#EAF2FC" stroke="#2E75B6" stroke-width="1.4"/>
+    <g transform="translate(593,128)" stroke="#2E75B6" stroke-width="1.6" fill="none">
+      <path d="M0 8V0H8"/>
+      <path d="M28 0H36V8"/>
+      <path d="M36 20V28H28"/>
+      <path d="M8 28H0V20"/>
+    </g>
+    <text x="639" y="146" font-size="17" font-weight="700" fill="#1B4F72">Frame acquisition</text>
+    <text x="593" y="175" font-size="13" fill="#2E75B6">
+      <tspan x="593" dy="0">OpenCV VideoCapture reads</tspan>
+      <tspan x="593" dy="18">sequential frames from the stream</tspan>
+    </text>
+  </g>
+
+  <!-- Box 3: ROI extraction -->
+  <g>
+    <rect x="1086" y="110" width="453" height="170" rx="14" fill="#EAF2FC" stroke="#2E75B6" stroke-width="1.4"/>
+    <g transform="translate(1106,128)" stroke="#2E75B6" stroke-width="1.6" fill="none">
+      <rect x="0" y="0" width="36" height="28" rx="2"/>
+      <line x1="0" y1="16" x2="36" y2="16"/>
+      <rect x="0" y="16" width="36" height="12" fill="#2E75B6" fill-opacity="0.18" stroke="none"/>
+    </g>
+    <text x="1152" y="146" font-size="17" font-weight="700" fill="#1B4F72">Road ROI extraction</text>
+    <text x="1106" y="175" font-size="13" fill="#2E75B6">
+      <tspan x="1106" dy="0">Processes only the lower 60% of</tspan>
+      <tspan x="1106" dy="18">each frame (removes sky / background)</tspan>
+    </text>
+  </g>
+
+  <!-- horizontal arrows row 1 -->
+  <line x1="513" y1="195" x2="571" y2="195" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="1026" y1="195" x2="1084" y2="195" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- vertical arrow row1 -> row2 (right side) -->
+  <line x1="1312" y1="280" x2="1312" y2="328" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ===================== ROW 2 ===================== -->
+
+  <!-- Box 4: YOLOv8 (rightmost) -->
+  <g>
+    <rect x="1086" y="330" width="453" height="170" rx="14" fill="#EAF2FC" stroke="#2E75B6" stroke-width="1.4"/>
+    <g transform="translate(1106,348)" stroke="#2E75B6" stroke-width="1.6" fill="none">
+      <rect x="6" y="6" width="24" height="24" rx="3"/>
+      <circle cx="12" cy="12" r="1.6" fill="#2E75B6" stroke="none"/>
+      <circle cx="24" cy="12" r="1.6" fill="#2E75B6" stroke="none"/>
+      <circle cx="12" cy="24" r="1.6" fill="#2E75B6" stroke="none"/>
+      <circle cx="24" cy="24" r="1.6" fill="#2E75B6" stroke="none"/>
+      <line x1="0" y1="18" x2="6" y2="18"/>
+      <line x1="30" y1="18" x2="36" y2="18"/>
+      <line x1="18" y1="0" x2="18" y2="6"/>
+      <line x1="18" y1="30" x2="18" y2="36"/>
+    </g>
+    <text x="1152" y="366" font-size="17" font-weight="700" fill="#1B4F72">YOLOv8 custom model</text>
+    <text x="1106" y="395" font-size="13" fill="#2E75B6">
+      <tspan x="1106" dy="0">Detects potholes in the ROI</tspan>
+      <tspan x="1106" dy="18">Outputs bounding boxes + confidence scores</tspan>
+    </text>
+  </g>
+
+  <!-- Box 5: Adaptive confidence filtering (middle) -->
+  <g>
+    <rect x="573" y="330" width="453" height="170" rx="14" fill="#EAF2FC" stroke="#2E75B6" stroke-width="1.4"/>
+    <g transform="translate(593,348)" stroke="#2E75B6" stroke-width="1.6" fill="none">
+      <path d="M0 0H36L22 18V32L14 28V18Z"/>
+    </g>
+    <text x="639" y="366" font-size="17" font-weight="700" fill="#1B4F72">Adaptive confidence filtering</text>
+    <text x="593" y="395" font-size="13" fill="#2E75B6">
+      <tspan x="593" dy="0">Center lane threshold: 0.40</tspan>
+      <tspan x="593" dy="18">Side lane threshold: 0.25</tspan>
+    </text>
+  </g>
+
+  <!-- Box 6: Rule-based severity assessment (leftmost) -->
+  <g>
+    <rect x="60" y="330" width="453" height="170" rx="14" fill="#FDEBD8" stroke="#E67E22" stroke-width="1.4"/>
+    <g transform="translate(80,348)" stroke="#E67E22" stroke-width="1.6" fill="none" stroke-linejoin="round">
+      <path d="M18 2L34 32H2Z"/>
+      <line x1="18" y1="14" x2="18" y2="22"/>
+      <circle cx="18" cy="27" r="1.4" fill="#E67E22" stroke="none"/>
+    </g>
+    <text x="126" y="366" font-size="17" font-weight="700" fill="#A04000">Rule-based severity assessment</text>
+    <text x="80" y="395" font-size="13" fill="#CA6F1E">
+      <tspan x="80" dy="0">Inputs: box size, frame-area ratio,</tspan>
+      <tspan x="80" dy="18">lane position &#8594; Low / Medium / High</tspan>
+    </text>
+  </g>
+
+  <!-- horizontal arrows row 2 (right to left) -->
+  <line x1="1084" y1="415" x2="1028" y2="415" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="571" y1="415" x2="515" y2="415" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- vertical arrow row2 -> row3 (left side) -->
+  <line x1="286" y1="500" x2="286" y2="548" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ===================== ROW 3 ===================== -->
+
+  <!-- Box 7: Temporal smoothing (leftmost) -->
+  <g>
+    <rect x="60" y="550" width="453" height="170" rx="14" fill="#FDEBD8" stroke="#E67E22" stroke-width="1.4"/>
+    <g transform="translate(80,568)" stroke="#E67E22" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="0,28 9,14 18,22 27,6 36,16"/>
+      <circle cx="18" cy="22" r="1.6" fill="#E67E22" stroke="none"/>
+    </g>
+    <text x="126" y="586" font-size="17" font-weight="700" fill="#A04000">Temporal smoothing</text>
+    <text x="80" y="615" font-size="13" fill="#CA6F1E">
+      <tspan x="80" dy="0">5-frame sliding window</tspan>
+      <tspan x="80" dy="18">Stabilizes severity predictions</tspan>
+    </text>
+  </g>
+
+  <!-- Box 8: Visualization (middle) -->
+  <g>
+    <rect x="573" y="550" width="453" height="170" rx="14" fill="#E9F7EF" stroke="#27AE60" stroke-width="1.4"/>
+    <g transform="translate(593,568)" stroke="#27AE60" stroke-width="1.6" fill="none">
+      <rect x="2" y="2" width="32" height="24" rx="2"/>
+      <line x1="2" y1="2" x2="9" y2="2"/>
+      <line x1="2" y1="2" x2="2" y2="9"/>
+      <line x1="34" y1="2" x2="27" y2="2"/>
+      <line x1="34" y1="2" x2="34" y2="9"/>
+      <line x1="2" y1="26" x2="9" y2="26"/>
+      <line x1="2" y1="26" x2="2" y2="19"/>
+      <line x1="34" y1="26" x2="27" y2="26"/>
+      <line x1="34" y1="26" x2="34" y2="19"/>
+      <circle cx="18" cy="14" r="2" fill="#27AE60" stroke="none"/>
+    </g>
+    <text x="639" y="586" font-size="17" font-weight="700" fill="#1E8449">Visualization</text>
+    <text x="593" y="615" font-size="13" fill="#229954">
+      <tspan x="593" dy="0">Draws boxes, confidence &amp; severity labels</tspan>
+      <tspan x="593" dy="18">Color-coded by severity level</tspan>
+    </text>
+  </g>
+
+  <!-- Box 9: Final output (rightmost) -->
+  <g>
+    <rect x="1086" y="550" width="453" height="170" rx="14" fill="#E9F7EF" stroke="#27AE60" stroke-width="1.4"/>
+    <g transform="translate(1106,568)" stroke="#27AE60" stroke-width="1.6" fill="none">
+      <rect x="0" y="0" width="36" height="24" rx="2"/>
+      <line x1="12" y1="28" x2="24" y2="28"/>
+      <line x1="18" y1="24" x2="18" y2="28"/>
+      <path d="M14 6L24 12L14 18Z" fill="#27AE60" stroke="none"/>
+    </g>
+    <text x="1152" y="586" font-size="17" font-weight="700" fill="#1E8449">Final annotated video output</text>
+    <text x="1106" y="615" font-size="13" fill="#229954">
+      <tspan x="1106" dy="0">Complete pothole detection and</tspan>
+      <tspan x="1106" dy="18">severity assessment result</tspan>
+    </text>
+  </g>
+
+  <!-- horizontal arrows row 3 (left to right) -->
+  <line x1="513" y1="635" x2="571" y2="635" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="1026" y1="635" x2="1084" y2="635" stroke="#5D6D7E" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- ===================== LEGEND ===================== -->
+  <line x1="60" y1="748" x2="1539" y2="748" stroke="#E5E7E9" stroke-width="1"/>
+
+  <text x="60" y="775" font-size="13" font-weight="700" fill="#5D6D7E">Stage type</text>
+  <rect x="150" y="765" width="16" height="16" rx="3" fill="#EAF2FC" stroke="#2E75B6"/>
+  <text x="174" y="778" font-size="13" fill="#2C3E50">Processing</text>
+  <rect x="290" y="765" width="16" height="16" rx="3" fill="#FDEBD8" stroke="#E67E22"/>
+  <text x="314" y="778" font-size="13" fill="#2C3E50">Severity analysis</text>
+  <rect x="460" y="765" width="16" height="16" rx="3" fill="#E9F7EF" stroke="#27AE60"/>
+  <text x="484" y="778" font-size="13" fill="#2C3E50">Output</text>
+
+  <text x="700" y="775" font-size="13" font-weight="700" fill="#5D6D7E">Severity color code</text>
+  <circle cx="895" cy="773" r="8" fill="#2ECC71"/>
+  <text x="910" y="778" font-size="13" fill="#2C3E50">Low</text>
+  <circle cx="980" cy="773" r="8" fill="#E67E22"/>
+  <text x="995" y="778" font-size="13" fill="#2C3E50">Medium</text>
+  <circle cx="1090" cy="773" r="8" fill="#E74C3C"/>
+  <text x="1105" y="778" font-size="13" fill="#2C3E50">High</text>
+
+  <text x="60" y="812" font-size="11.5" fill="#909497">
+    Flow: Input video &#8594; Frame acquisition &#8594; ROI extraction &#8594; YOLOv8 detection &#8594; Confidence filtering &#8594; Severity assessment &#8594; Temporal smoothing &#8594; Visualization &#8594; Annotated output
+  </text>
+</svg>
